@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
 
 import WeatherDTO from '@interfaces/WeatherDTO';
@@ -33,9 +34,13 @@ class OpenWeatherMapProvider implements IWeatherProvider {
         }
       });
       return data;
-    } catch (err) {
+    } catch (err: any) {
       logger.error('[OpenWeatherMapProvider] - search - Error:', err);
-      if (Number(err.response.data.cod) === 404) {
+      if (
+        err.response &&
+        err.response.data &&
+        Number(err.response.data.cod) === 404
+      ) {
         throw new AppError('Location not found', 404);
       }
       throw err;

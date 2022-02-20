@@ -1,18 +1,14 @@
 {
-  "compilerOptions": {
-    "target": "ES2020",
-    "module": "commonjs",
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "strict": true,
-    "allowJs": true,
-    "strictPropertyInitialization": false,
-    "baseUrl": "./src",
-    "esModuleInterop": true,
+  "compilerOptions": {  
+    "target": "ES2019",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "skipLibCheck": true,
+    "module": "commonjs",
+    "rootDir": "./",
+    "moduleResolution": "node",
+    "baseUrl": "./src",
     "paths": {
+      "@app/*": ["app/*"],
       "@config/*": ["config/*"],
       "@controllers/*": ["controllers/*"],
       "@errors/*": ["errors/*"],
@@ -23,7 +19,13 @@
       "@services/*": ["services/*"],
       "@utils/*": ["utils/*"],
     },
-    "moduleResolution": "Node",
-    "forceConsistentCasingInFileNames": true
+    "allowJs": true,
+    "resolveJsonModule": true,  
+    "outDir": "./dist",  
+    "esModuleInterop": true,    
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,   
+    "strictPropertyInitialization": false,
+    "skipLibCheck": true         
   }
 }

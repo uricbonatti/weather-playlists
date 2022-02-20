@@ -1,0 +1,93 @@
+{
+  "tracks": {
+      "href": "https://api.spotify.com/v1/search?query=genre%3Apop+music&type=track&offset=0&limit=20",
+      "items": [
+          {
+              "album": {
+                  "album_type": "album",
+                  "artists": [
+                      {
+                          "external_urls": {
+                              "spotify": "https://open.spotify.com/artist/0LyfQWJT6nXafLPZqxe9Of"
+                          },
+                          "href": "https://api.spotify.com/v1/artists/0LyfQWJT6nXafLPZqxe9Of",
+                          "id": "0LyfQWJT6nXafLPZqxe9Of",
+                          "name": "Various Artists",
+                          "type": "artist",
+                          "uri": "spotify:artist:0LyfQWJT6nXafLPZqxe9Of"
+                      }
+                  ],
+                  "available_markets": [
+                      "AR"
+                  ],
+                  "external_urls": {
+                      "spotify": "https://open.spotify.com/album/7KCNnPszXC0puYXQZqDyte"
+                  },
+                  "href": "https://api.spotify.com/v1/albums/7KCNnPszXC0puYXQZqDyte",
+                  "id": "7KCNnPszXC0puYXQZqDyte",
+                  "images": [
+                      {
+                          "height": 640,
+                          "url": "https://i.scdn.co/image/ab67616d0000b2738e5154f93cea253d3088262d",
+                          "width": 640
+                      },
+                      {
+                          "height": 300,
+                          "url": "https://i.scdn.co/image/ab67616d00001e028e5154f93cea253d3088262d",
+                          "width": 300
+                      },
+                      {
+                          "height": 64,
+                          "url": "https://i.scdn.co/image/ab67616d000048518e5154f93cea253d3088262d",
+                          "width": 64
+                      }
+                  ],
+                  "name": "Tesoros Musicales: 00's",
+                  "release_date": "2022-02-17",
+                  "release_date_precision": "day",
+                  "total_tracks": 40,
+                  "type": "album",
+                  "uri": "spotify:album:7KCNnPszXC0puYXQZqDyte"
+              },
+              "artists": [
+                  {
+                      "external_urls": {
+                          "spotify": "https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"
+                      },
+                      "href": "https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02",
+                      "id": "06HL4z0CvFAxyc27GXpf02",
+                      "name": "Taylor Swift",
+                      "type": "artist",
+                      "uri": "spotify:artist:06HL4z0CvFAxyc27GXpf02"
+                  }
+              ],
+              "available_markets": [
+                  "AR"
+              ],
+              "disc_number": 1,
+              "duration_ms": 235766,
+              "explicit": false,
+              "external_ids": {
+                  "isrc": "USUG12100342"
+              },
+              "external_urls": {
+                  "spotify": "https://open.spotify.com/track/5JixKG2cp8uTu7RmjmD0aQ"
+              },
+              "href": "https://api.spotify.com/v1/tracks/5JixKG2cp8uTu7RmjmD0aQ",
+              "id": "5JixKG2cp8uTu7RmjmD0aQ",
+              "is_local": false,
+              "name": "Love Story (Taylor’s Version)",
+              "popularity": 0,
+              "preview_url": null,
+              "track_number": 35,
+              "type": "track",
+              "uri": "spotify:track:5JixKG2cp8uTu7RmjmD0aQ"
+          }
+      ],
+      "limit": 1,
+      "next": "https://api.spotify.com/v1/search?query=genre%3Apop+music&type=track&offset=20&limit=20",
+      "offset": 0,
+      "previous": null,
+      "total": 10000
+  }
+}

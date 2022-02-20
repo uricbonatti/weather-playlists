@@ -1,0 +1,93 @@
+{
+  "tracks": {
+      "href": "https://api.spotify.com/v1/search?query=genre%3Aclassic+rock&type=track&offset=0&limit=20",
+      "items": [
+          {
+              "album": {
+                  "album_type": "album",
+                  "artists": [
+                      {
+                          "external_urls": {
+                              "spotify": "https://open.spotify.com/artist/0LyfQWJT6nXafLPZqxe9Of"
+                          },
+                          "href": "https://api.spotify.com/v1/artists/0LyfQWJT6nXafLPZqxe9Of",
+                          "id": "0LyfQWJT6nXafLPZqxe9Of",
+                          "name": "Various Artists",
+                          "type": "artist",
+                          "uri": "spotify:artist:0LyfQWJT6nXafLPZqxe9Of"
+                      }
+                  ],
+                  "available_markets": [
+                      "AR"
+                  ],
+                  "external_urls": {
+                      "spotify": "https://open.spotify.com/album/3pElasmTxUScniuzNoGEXc"
+                  },
+                  "href": "https://api.spotify.com/v1/albums/3pElasmTxUScniuzNoGEXc",
+                  "id": "3pElasmTxUScniuzNoGEXc",
+                  "images": [
+                      {
+                          "height": 640,
+                          "url": "https://i.scdn.co/image/ab67616d0000b2732b235ed500932892b32f4db7",
+                          "width": 640
+                      },
+                      {
+                          "height": 300,
+                          "url": "https://i.scdn.co/image/ab67616d00001e022b235ed500932892b32f4db7",
+                          "width": 300
+                      },
+                      {
+                          "height": 64,
+                          "url": "https://i.scdn.co/image/ab67616d000048512b235ed500932892b32f4db7",
+                          "width": 64
+                      }
+                  ],
+                  "name": "¿Rock? ¡pero con pop!",
+                  "release_date": "2022-02-11",
+                  "release_date_precision": "day",
+                  "total_tracks": 31,
+                  "type": "album",
+                  "uri": "spotify:album:3pElasmTxUScniuzNoGEXc"
+              },
+              "artists": [
+                  {
+                      "external_urls": {
+                          "spotify": "https://open.spotify.com/artist/3IYUhFvPQItj6xySrBmZkd"
+                      },
+                      "href": "https://api.spotify.com/v1/artists/3IYUhFvPQItj6xySrBmZkd",
+                      "id": "3IYUhFvPQItj6xySrBmZkd",
+                      "name": "Creedence Clearwater Revival",
+                      "type": "artist",
+                      "uri": "spotify:artist:3IYUhFvPQItj6xySrBmZkd"
+                  }
+              ],
+              "available_markets": [
+                  "AR"
+              ],
+              "disc_number": 1,
+              "duration_ms": 160133,
+              "explicit": false,
+              "external_ids": {
+                  "isrc": "USC4R0817643"
+              },
+              "external_urls": {
+                  "spotify": "https://open.spotify.com/track/675SuKGFjigRRcGg8Ju6gT"
+              },
+              "href": "https://api.spotify.com/v1/tracks/675SuKGFjigRRcGg8Ju6gT",
+              "id": "675SuKGFjigRRcGg8Ju6gT",
+              "is_local": false,
+              "name": "Have You Ever Seen The Rain",
+              "popularity": 0,
+              "preview_url": null,
+              "track_number": 6,
+              "type": "track",
+              "uri": "spotify:track:675SuKGFjigRRcGg8Ju6gT"
+          }
+      ],
+      "limit": 1,
+      "next": "https://api.spotify.com/v1/search?query=genre%3Aclassic+rock&type=track&offset=20&limit=20",
+      "offset": 0,
+      "previous": null,
+      "total": 10000
+  }
+}

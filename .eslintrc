@@ -41,6 +41,7 @@
     "no-useless-constructor": "off",
     "camelcase": "off",
     "no-unused-vars": "off",
+    "no-explicit-any": "off",
     "@typescript-exlint/no-explicit-any": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-unused-vars": [

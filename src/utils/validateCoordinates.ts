@@ -1,4 +1,4 @@
-import { Coordinates } from '@interfaces/IWeatherProvider';
+import { Coordinates } from '@interfaces/LocationDTO';
 
 export function betweenRange(value: number, n1: number, n2: number): boolean {
   return n1 <= value && n2 >= value;

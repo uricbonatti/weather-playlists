@@ -3,8 +3,8 @@ import logger from '@utils/logger';
 import IWeatherProvider from '@interfaces/IWeatherProvider';
 import ISoundtrackProvider from '@interfaces/ISoundtrackProvider';
 import LocationDTO from './../interfaces/LocationDTO';
-import { AppError } from '@errors/AppError';
-import validateCoordinates from '@utils/validateCoordinates';
+import AppError from '@errors/AppError';
+import SoundtrackDTO from '@interfaces/SoundtrackDTO';
 
 enum MusicGenre {
   party = 'genre:party',
@@ -22,14 +22,17 @@ class SoundtrackByTemperatureService {
     private soundtrackProvider: ISoundtrackProvider
   ) {}
 
-  public async execute({ city, coordinates }: LocationDTO): Promise<any> {
+  public async execute({
+    city,
+    coordinates
+  }: LocationDTO): Promise<SoundtrackDTO> {
     logger.info(
       `[SoundtrackByTemperatureService] - execute - Location: ${JSON.stringify({
         city,
         coordinates
       })}`
     );
-    if (city || (coordinates && validateCoordinates(coordinates))) {
+    if (city || coordinates) {
       const { main } = await this.weatherProvider.search({ city, coordinates });
       const { temp } = main;
 

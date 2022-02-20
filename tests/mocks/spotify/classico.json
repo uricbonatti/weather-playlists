@@ -1,0 +1,103 @@
+{
+  "tracks": {
+      "href": "https://api.spotify.com/v1/search?query=genre%3Aclassical&type=track&offset=0&limit=20",
+      "items": [
+          {
+              "album": {
+                  "album_type": "compilation",
+                  "artists": [
+                      {
+                          "external_urls": {
+                              "spotify": "https://open.spotify.com/artist/0LyfQWJT6nXafLPZqxe9Of"
+                          },
+                          "href": "https://api.spotify.com/v1/artists/0LyfQWJT6nXafLPZqxe9Of",
+                          "id": "0LyfQWJT6nXafLPZqxe9Of",
+                          "name": "Various Artists",
+                          "type": "artist",
+                          "uri": "spotify:artist:0LyfQWJT6nXafLPZqxe9Of"
+                      }
+                  ],
+                  "available_markets": [
+                      "AD"
+                  ],
+                  "external_urls": {
+                      "spotify": "https://open.spotify.com/album/5jZ6o7MwiGUTkCEfrNFfkE"
+                  },
+                  "href": "https://api.spotify.com/v1/albums/5jZ6o7MwiGUTkCEfrNFfkE",
+                  "id": "5jZ6o7MwiGUTkCEfrNFfkE",
+                  "images": [
+                      {
+                          "height": 640,
+                          "url": "https://i.scdn.co/image/ab67616d0000b273fe7c57cd88231f04700bbd25",
+                          "width": 640
+                      },
+                      {
+                          "height": 300,
+                          "url": "https://i.scdn.co/image/ab67616d00001e02fe7c57cd88231f04700bbd25",
+                          "width": 300
+                      },
+                      {
+                          "height": 64,
+                          "url": "https://i.scdn.co/image/ab67616d00004851fe7c57cd88231f04700bbd25",
+                          "width": 64
+                      }
+                  ],
+                  "name": "Classical Noir",
+                  "release_date": "2022-02-05",
+                  "release_date_precision": "day",
+                  "total_tracks": 25,
+                  "type": "album",
+                  "uri": "spotify:album:5jZ6o7MwiGUTkCEfrNFfkE"
+              },
+              "artists": [
+                  {
+                      "external_urls": {
+                          "spotify": "https://open.spotify.com/artist/2uFUBdaVGtyMqckSeCl0Qj"
+                      },
+                      "href": "https://api.spotify.com/v1/artists/2uFUBdaVGtyMqckSeCl0Qj",
+                      "id": "2uFUBdaVGtyMqckSeCl0Qj",
+                      "name": "Ludovico Einaudi",
+                      "type": "artist",
+                      "uri": "spotify:artist:2uFUBdaVGtyMqckSeCl0Qj"
+                  },
+                  {
+                      "external_urls": {
+                          "spotify": "https://open.spotify.com/artist/1yLIaxyVkZnLMXhfRSYEjV"
+                      },
+                      "href": "https://api.spotify.com/v1/artists/1yLIaxyVkZnLMXhfRSYEjV",
+                      "id": "1yLIaxyVkZnLMXhfRSYEjV",
+                      "name": "Johannes Bornlöf",
+                      "type": "artist",
+                      "uri": "spotify:artist:1yLIaxyVkZnLMXhfRSYEjV"
+                  }
+              ],
+              "available_markets": [
+                  "AD"
+              ],
+              "disc_number": 1,
+              "duration_ms": 424200,
+              "explicit": false,
+              "external_ids": {
+                  "isrc": "SEWDL6142766"
+              },
+              "external_urls": {
+                  "spotify": "https://open.spotify.com/track/6HqaTDzMAHSlhXuMysUOUb"
+              },
+              "href": "https://api.spotify.com/v1/tracks/6HqaTDzMAHSlhXuMysUOUb",
+              "id": "6HqaTDzMAHSlhXuMysUOUb",
+              "is_local": false,
+              "name": "Divenire",
+              "popularity": 6,
+              "preview_url": "https://p.scdn.co/mp3-preview/b27ccffb15ddc65762440ff949f4a823566e1aa5?cid=774b29d4f13844c495f206cafdad9c86",
+              "track_number": 12,
+              "type": "track",
+              "uri": "spotify:track:6HqaTDzMAHSlhXuMysUOUb"
+          }
+      ],
+      "limit": 1,
+      "next": "https://api.spotify.com/v1/search?query=genre%3Aclassical&type=track&offset=20&limit=20",
+      "offset": 0,
+      "previous": null,
+      "total": 10000
+  }
+}

@@ -1,7 +1,26 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { isCelebrateError } from 'celebrate';
 import { Request, Response, NextFunction } from 'express';
 import AppError from './AppError';
+import celebrateErrorResponses from './celebrateErrorResponses';
+
+export function findOnCelebrateErrorResponse(
+  key: string,
+  celebrateDefaultMessage: string
+) {
+  const errorResponse = celebrateErrorResponses.find((response: any) =>
+    response.keys.includes(key)
+  );
+  if (!errorResponse) {
+    return {
+      status: 'error',
+      message: celebrateDefaultMessage.replace(/["]/g, "'")
+    };
+  }
+  const { keys, ...response } = errorResponse;
+  return response;
+}
 
 function errorHandler(
   err: any,
@@ -10,14 +29,19 @@ function errorHandler(
   _: NextFunction
 ) {
   if (isCelebrateError(err)) {
-    const errorBody = err.details.get('body');
-    const {
-      details: [errorDetails]
-    } = errorBody as any;
-    return response.status(400).json({
-      status: 'error',
-      message: errorDetails.message.replace(/["]/g, "'")
+    const arrayErrorDetails: any[] = [];
+    err.details.forEach((detail: any) => {
+      const {
+        details: [errorDetails]
+      } = detail as any;
+      arrayErrorDetails.push(errorDetails);
     });
+    const error = arrayErrorDetails.shift();
+    const responseContent = findOnCelebrateErrorResponse(
+      error.context.key,
+      error.message
+    );
+    return response.status(400).json(responseContent);
   }
   if (err instanceof AppError) {
     return response
