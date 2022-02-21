@@ -104,80 +104,17 @@ components:
           type: string
           example: Too many requests from this IP, please try again after 5 minutes
     Soundtrack:
-      type: object
-      properties:
-        tracks:
-          type: object
-          properties:
-            href:
-              type: string
-              example: https://api.spotify.com/v1/search?query=genre%3Apop+music&type=track&offset=0&limit=20
-            items:
-              minItems: 0
-              type: array
-              items:
-                type: object
-                properties:
-                  album:
-                    type: object
-                    properties: {}
-                  artists:
-                    minItems: 1
-                    type: array
-                    items:
-                      type: object
-                      properties: {}
-                  disc_number:
-                    type: number
-                    example: 1.0
-                  duration_ms:
-                    type: number
-                    example: 235766.0
-                  explicit:
-                    type: boolean
-                    example: false
-                  external_ids:
-                    type: object
-                    properties: {}
-                  href:
-                    type: string
-                    example: https://api.spotify.com/v1/tracks/5JixKG2cp8uTu7RmjmD0aQ
-                  external_urls:
-                    type: object
-                    properties:
-                      spotify:
-                        type: string
-                        example: https://open.spotify.com/track/5JixKG2cp8uTu7RmjmD0aQ
-                  id:
-                    type: string
-                    example: 5JixKG2cp8uTu7RmjmD0aQ
-                  is_local:
-                    type: boolean
-                    example: false
-                  name:
-                    type: string
-                    example: Love Story (Taylor’s Version)
-                  popularity:
-                    type: number
-                    example: 0.0
-                  type:
-                    type: string
-                    example: track
-                  uri:
-                    type: string
-                    example: spotify:track:5JixKG2cp8uTu7RmjmD0aQ
-            limit:
-              type: number
-              example: 1.0
-            next:
-              type: string
-              example: https://api.spotify.com/v1/search?query=genre%3Apop+music&type=track&offset=20&limit=20
-            offset:
-              type: number
-              example: 0.0
-            previous:
-              type: string
-              example: null
-            total:
-              type: string
-              example: "10000"
+      type: array
+      minItems: 0
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            example: Wenn Es Nachts Ist
+          uri:
+            type: string
+            example: spotify:track:5r0iMfLookwrfLiYNXEgF1
+          spotify_link:
+            type: string
+            example: https://open.spotify.com/track/675SuKGFjigRRcGg8Ju6gT

@@ -23,24 +23,40 @@ describe('SpotifySoundtrackProvider', () => {
   });
   it('should be able to get the tracks from spotify api with valid params on search ', async () => {
     const data = await provider.search('genre:pop music');
-    expect(data).toMatchObject({ soundtrack: popTrack });
+    expect(data).toMatchObject({
+      soundtrack: [
+        {
+          name: 'Love Story (Taylor’s Version)',
+          uri: 'spotify:track:5JixKG2cp8uTu7RmjmD0aQ',
+          spotify_link: 'https://open.spotify.com/track/5JixKG2cp8uTu7RmjmD0aQ'
+        }
+      ]
+    });
   });
   it('should throw an app error when occurs on search', async () => {
     await expect(provider.search('failure')).rejects.toBeInstanceOf(AppError);
   });
   it('should be able to get the tracks from cache on search', async () => {
     fakeCacheProvider.save('weather_playlists:spotify:genre:classical', {
-      soundtrack: { mockedTracks: true }
+      soundtrack: { name: 'mockedTracks' }
     });
     const data = await provider.search('genre:classical');
-    expect(data).toMatchObject({ soundtrack: { mockedTracks: true } });
+    expect(data).toMatchObject({ soundtrack: { name: 'mockedTracks' } });
   });
   it('should be able to get the tracks from spotify api and save in cache on search ', async () => {
     await provider.search('genre:classic rock');
     const data = await fakeCacheProvider.recover(
       'weather_playlists:spotify:genre:classic rock'
     );
-    expect(data).toMatchObject({ soundtrack: rockTrack });
+    expect(data).toMatchObject({
+      soundtrack: [
+        {
+          name: 'Have You Ever Seen The Rain',
+          uri: 'spotify:track:675SuKGFjigRRcGg8Ju6gT',
+          spotify_link: 'https://open.spotify.com/track/675SuKGFjigRRcGg8Ju6gT'
+        }
+      ]
+    });
   });
   it('should be able to auth on spotify caching token on init', async () => {
     await provider.init();

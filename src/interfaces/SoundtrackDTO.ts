@@ -1,7 +1,9 @@
 export interface SpotifySoundtrack {
-  [key: string]: any;
+  name: string;
+  uri: string;
+  spotify_link: string;
 }
 
 export default interface SoundtrackDTO {
-  soundtrack: SpotifySoundtrack;
+  soundtrack: SpotifySoundtrack[];
 }

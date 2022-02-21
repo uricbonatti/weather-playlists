@@ -48,7 +48,15 @@ class SpotifySoundtrackProvider implements ISoundtrackProvider {
       }
       await this.init();
       const { body } = await this.spotifyApi.searchTracks(searchParams);
-      const tracks = { soundtrack: body as SpotifySoundtrack };
+      const items = body && body.tracks ? body.tracks.items : [];
+      const adjustedTracks = items.map((music) => {
+        return {
+          name: music.name,
+          uri: music.uri,
+          spotify_link: music.external_urls.spotify
+        } as SpotifySoundtrack;
+      });
+      const tracks = { soundtrack: adjustedTracks };
       await this.cacheProvider.save(cacheKey, tracks);
 
       return tracks;
