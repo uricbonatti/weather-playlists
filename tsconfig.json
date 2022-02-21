@@ -17,7 +17,7 @@
       "@providers/*": ["providers/*"],
       "@routes/*": ["routes/*"],
       "@services/*": ["services/*"],
-      "@utils/*": ["utils/*"],
+      "@utils/*": ["utils/*"]
     },
     "allowJs": true,
     "resolveJsonModule": true,  
