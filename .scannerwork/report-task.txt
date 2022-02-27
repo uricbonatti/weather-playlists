@@ -1,0 +1,6 @@
+projectKey=dev.uric:weather-playlists
+serverUrl=http://localhost:9001
+serverVersion=9.0.1.46107
+dashboardUrl=http://localhost:9001/dashboard?id=dev.uric%3Aweather-playlists
+ceTaskId=AX89Au1XSdwXAVT6wfJy
+ceTaskUrl=http://localhost:9001/api/ce/task?id=AX89Au1XSdwXAVT6wfJy

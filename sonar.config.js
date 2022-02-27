@@ -1,6 +1,8 @@
 const scanner = require("sonarqube-scanner");
 const { version, name } = require("./package.json");
 
+
+
 scanner(
   {
     serverUrl: "http://localhost:9001",
@@ -14,8 +16,16 @@ scanner(
       "sonar.tests": "./tests",
       "sonar.language": "ts",
       "sonar.sourceEncoding": "UTF-8",
-      "sonar.exclusions":
-        "./node_modules/**,strykers.conf.js,sonar.config.js, src/config/*.ts,src/utils/logger.ts,src/app/server.ts",
+      "sonar.exclusions": [
+        "./node_modules/**",
+        'strykers.conf.js',
+        'sonar.config.js',
+        'src/config/*.ts',
+        'src/utils/logger.ts',
+        'src/app/server.ts',
+        'src/telemetry/*.ts',
+        'src/middlewares/metrics.ts'
+      ].join(','), 
       "sonar.typescript.lcov.reportPaths": "./coverage/lcov.info",
     },
   },

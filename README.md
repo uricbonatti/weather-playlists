@@ -54,6 +54,11 @@ SPOTIFY_SECRET=
 #REQUEST LIMITER
 MAX_REQUESTS=60
 MINUTES_RESEND_REQUEST=5
+
+#TELEMETRY CONFIGS
+ENABLE_METRICS= 
+ENABLE_TELEMETRY=
+JAEGER_COLLECTOR_URL=
 ```
 
 Com as variaveis de ambiente configuradas, instale as dependencias do projeto atraves do:

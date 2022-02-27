@@ -9,6 +9,8 @@ module.exports = {
     "!<rootDir>/src/config/*.ts",
     "!<rootDir>/src/interfaces/*.ts",
     "!<rootDir>/src/utils/logger.ts",
+    "!<rootDir>/src/telemetry/*.ts",
+    "!<rootDir>/src/middlewares/metrics.ts",
   ],
   coverageDirectory: "coverage",
   coverageProvider: "v8",

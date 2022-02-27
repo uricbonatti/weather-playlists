@@ -9,8 +9,8 @@ export function findOnCelebrateErrorResponse(
   key: string,
   celebrateDefaultMessage: string
 ) {
-  const errorResponse = celebrateErrorResponses.find((response: any) =>
-    response.keys.includes(key)
+  const errorResponse = celebrateErrorResponses.find((errorData: any) =>
+    errorData.keys.includes(key)
   );
   if (!errorResponse) {
     return {
@@ -18,8 +18,8 @@ export function findOnCelebrateErrorResponse(
       message: celebrateDefaultMessage.replace(/["]/g, "'")
     };
   }
-  const { keys, ...response } = errorResponse;
-  return response;
+  const { keys, ...errors } = errorResponse;
+  return errors;
 }
 
 function errorHandler(
@@ -33,7 +33,7 @@ function errorHandler(
     err.details.forEach((detail: any) => {
       const {
         details: [errorDetails]
-      } = detail as any;
+      } = detail;
       arrayErrorDetails.push(errorDetails);
     });
     const error = arrayErrorDetails.shift();

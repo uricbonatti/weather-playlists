@@ -27,7 +27,7 @@ class SoundtrackByTemperatureService {
     coordinates
   }: LocationDTO): Promise<SoundtrackDTO> {
     logger.info(
-      `[SoundtrackByTemperatureService] - execute - Location: ${JSON.stringify({
+      `[WeatherSoundtrackService] - execute - Location: ${JSON.stringify({
         city,
         coordinates
       })}`
@@ -45,10 +45,9 @@ class SoundtrackByTemperatureService {
         soundtrackGenre = MusicGenre.rock;
       }
       logger.info(
-        `[SoundtrackByTemperatureService] - execute - Temp: ${temp} - Genre: ${soundtrackGenre}`
+        `[WeatherSoundtrackService] - execute - Temp: ${temp} - Genre: ${soundtrackGenre}`
       );
-      const soundtrack = await this.soundtrackProvider.search(soundtrackGenre);
-      return soundtrack;
+      return this.soundtrackProvider.search(soundtrackGenre);
     }
     throw new AppError('City or valid coordinates must be informed');
   }
