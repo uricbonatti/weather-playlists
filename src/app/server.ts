@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-
+import '../telemetry';
 import '@config/containers';
 
 import app from './app';
