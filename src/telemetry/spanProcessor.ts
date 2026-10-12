@@ -1,24 +1,19 @@
+import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http';
 import {
-  JaegerExporter,
-  ExporterConfig as JaegerConfig
-} from '@opentelemetry/exporter-jaeger';
-import { tracing } from '@opentelemetry/sdk-node';
+  BatchSpanProcessor,
+  SimpleSpanProcessor
+} from '@opentelemetry/sdk-trace-base';
 
 import env from '@config/env';
 
-const jaegerCollectorUrl = env.JAEGER_COLLECTOR_URL;
-const jaegerConfig: JaegerConfig = {
-  tags: [
-    { key: 'node.version', value: process.version },
-    { key: 'env', value: env.NODE_ENV || 'development' }
-  ],
-  endpoint: jaegerCollectorUrl
-};
+// Envia via OTLP/HTTP (o Jaeger aceita OTLP nativamente na porta 4318).
+const exporter = new OTLPTraceExporter({
+  url: `${env.OTEL_EXPORTER_OTLP_ENDPOINT}/v1/traces`
+});
 
-const jaegerExporter = new JaegerExporter(jaegerConfig);
 const spanProcessor =
-  process.env.NODE_ENV !== 'production'
-    ? new tracing.SimpleSpanProcessor(jaegerExporter)
-    : new tracing.BatchSpanProcessor(jaegerExporter);
+  env.NODE_ENV !== 'production'
+    ? new SimpleSpanProcessor(exporter)
+    : new BatchSpanProcessor(exporter);
 
 export default spanProcessor;

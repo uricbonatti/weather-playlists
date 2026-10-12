@@ -6,10 +6,6 @@ import AppError from '@errors/AppError';
 import SpotifySoundtrackProvider from '@providers/SoundtrackProvider/SpotifySoundtrackProvider';
 import FakeCacheProvider from './../../../mocks/FakeCacheProvider';
 
-import * as rockTrack from '../../../mocks/spotify/rock.json';
-import * as popTrack from '../../../mocks/spotify/pop.json';
-import * as classicTrack from '../../../mocks/spotify/classico.json';
-import * as partyTrack from '../../../mocks/spotify/festa.json';
 import SpotifyWebApi from 'spotify-web-api-node';
 
 let provider: SpotifySoundtrackProvider;

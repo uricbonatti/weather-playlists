@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import ISoundtrackProvider from '@interfaces/ISoundtrackProvider';
 import SoundtrackDTO from '@interfaces/SoundtrackDTO';
 

@@ -11,10 +11,10 @@ export default {
   SPOTIFY_SECRET: process.env.SPOTIFY_SECRET,
   SPOTIFY_CLIENT_ID: process.env.SPOTIFY_CLIENT_ID,
   REDIS_HOST: process.env.REDIS_HOST,
-  REDIS_PORT: process.env.REDIS_PORT,
+  REDIS_PORT: Number(process.env.REDIS_PORT || 6379),
   REDIS_PASS: process.env.REDIS_PASS,
-  JAEGER_COLLECTOR_URL:
-    process.env.JAEGER_COLLECTOR_URL || 'http://localhost:14268/api/traces',
-  ENABLE_METRICS: process.env.ENABLE_METRICS || false,
-  ENABLE_TELEMETRY: process.env.ENABLE_TELEMETRY || false
+  OTEL_EXPORTER_OTLP_ENDPOINT:
+    process.env.OTEL_EXPORTER_OTLP_ENDPOINT || 'http://localhost:4318',
+  ENABLE_METRICS: process.env.ENABLE_METRICS === 'true',
+  ENABLE_TELEMETRY: process.env.ENABLE_TELEMETRY === 'true'
 };

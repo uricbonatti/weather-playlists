@@ -1,31 +1,49 @@
 {
-  "compilerOptions": {  
-    "target": "ES2019",
+  "compilerOptions": {
+    "target": "ES2022",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "module": "commonjs",
     "rootDir": "./",
     "moduleResolution": "node",
-    "baseUrl": "./src",
     "paths": {
-      "@app/*": ["app/*"],
-      "@config/*": ["config/*"],
-      "@controllers/*": ["controllers/*"],
-      "@errors/*": ["errors/*"],
-      "@interfaces/*": ["interfaces/*"],
-      "@middlewares/*": ["middlewares/*"],
-      "@providers/*": ["providers/*"],
-      "@routes/*": ["routes/*"],
-      "@services/*": ["services/*"],
-      "@utils/*": ["utils/*"]
+      "@app/*": [
+        "./src/app/*"
+      ],
+      "@config/*": [
+        "./src/config/*"
+      ],
+      "@controllers/*": [
+        "./src/controllers/*"
+      ],
+      "@errors/*": [
+        "./src/errors/*"
+      ],
+      "@interfaces/*": [
+        "./src/interfaces/*"
+      ],
+      "@middlewares/*": [
+        "./src/middlewares/*"
+      ],
+      "@providers/*": [
+        "./src/providers/*"
+      ],
+      "@routes/*": [
+        "./src/routes/*"
+      ],
+      "@services/*": [
+        "./src/services/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ]
     },
-    "allowJs": true,
-    "resolveJsonModule": true,  
-    "outDir": "./dist",  
-    "esModuleInterop": true,    
+    "resolveJsonModule": true,
+    "outDir": "./dist",
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true,   
+    "strict": true,
     "strictPropertyInitialization": false,
-    "skipLibCheck": true         
+    "skipLibCheck": true
   }
 }

@@ -12,7 +12,7 @@ import env from '@config/env';
 function app() {
   const expressApp = express();
   expressApp.use(cors(corsConfig));
-  env.ENABLE_METRICS && expressApp.use(metrics);
+  if (env.ENABLE_METRICS) expressApp.use(metrics);
   expressApp.use(express.json());
   expressApp.use(limiter);
   expressApp.use(weatherSoundtrackRouter);

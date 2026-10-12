@@ -1,14 +1,14 @@
 import { Server } from 'http';
 import 'reflect-metadata';
 
-import supertest, { SuperAgentTest } from 'supertest';
+import supertest from 'supertest';
 import { container } from 'tsyringe';
 
 import app from '@app/app';
 import AppError from '@errors/AppError';
 
 let server: Server;
-let agent: SuperAgentTest;
+let agent: ReturnType<typeof supertest.agent>;
 let forceError: boolean;
 let forceAppError: boolean;
 

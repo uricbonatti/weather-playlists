@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import 'reflect-metadata';
 import { container } from 'tsyringe';
 
