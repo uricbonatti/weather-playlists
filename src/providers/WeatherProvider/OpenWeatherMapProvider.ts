@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
 
 import WeatherDTO from '@interfaces/WeatherDTO';
@@ -29,8 +28,8 @@ class OpenWeatherMapProvider implements IWeatherProvider {
         params: {
           appid: env.OPEN_WEATHER_API_KEY,
           units: 'metric',
-          q: city,
-          ...coordinates
+          // Cidade tem prioridade; coordenadas só quando não há cidade (evita mandar lat=0/lon=0 junto).
+          ...(city ? { q: city } : coordinates)
         }
       });
       return data;

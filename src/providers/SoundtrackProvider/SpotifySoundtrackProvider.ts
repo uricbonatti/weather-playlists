@@ -40,9 +40,8 @@ class SpotifySoundtrackProvider implements ISoundtrackProvider {
   public async search(searchParams: string): Promise<SoundtrackDTO> {
     const cacheKey = `weather_playlists:spotify:${searchParams}`;
     try {
-      const cachedData = await this.cacheProvider.recover<SoundtrackDTO>(
-        cacheKey
-      );
+      const cachedData =
+        await this.cacheProvider.recover<SoundtrackDTO>(cacheKey);
       if (cachedData) {
         return cachedData;
       }

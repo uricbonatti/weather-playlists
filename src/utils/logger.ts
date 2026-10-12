@@ -13,13 +13,9 @@ function tracingFormat() {
     return info;
   })();
 }
-const jaegerTransport = new transports.Http({
-  format: format.combine(tracingFormat(), format.json()),
-  silent: false
-});
 const setTransports =
   env.NODE_ENV === 'test'
-    ? []
+    ? [new transports.Console({ silent: true })]
     : [
         new transports.Console({
           format: format.combine(
@@ -39,5 +35,4 @@ const logger = createLogger({
   transports: setTransports
 });
 
-logger.add(jaegerTransport);
 export default logger;

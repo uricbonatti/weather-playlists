@@ -6,9 +6,9 @@ import instrumentations from './instrumentations';
 import env from '@config/env';
 
 const sdk = new NodeSDK({
-  resource: resource,
-  spanProcessor,
+  resource,
+  spanProcessors: [spanProcessor],
   instrumentations
 });
 
-env.ENABLE_TELEMETRY && sdk.start();
+if (env.ENABLE_TELEMETRY) sdk.start();

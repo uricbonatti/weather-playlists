@@ -1,33 +1,23 @@
-version: "3.9"
 services:
-  api:     
+  api:
     build: .
-    image: uricbonatti/weather-playlists-api:v1.1
     container_name: weather-playlists-api
-    ports: 
+    ports:
       - "3333:3333"
-    networks:
-      - challenge
+    env_file: .env
     environment:
-      OPEN_WEATHER_API_KEY: b77e07f479efe92156376a8b07640ced
-      SPOTIFY_CLIENT_ID: 4d8f63b3e1894c73a9d6fa0e7085e60f
-      SPOTIFY_SECRET: 6dd251a17f9a422b9ba04175438ad8ab
-      REDIS_HOST: 'redis'
+      REDIS_HOST: redis
       REDIS_PORT: 6379
-      REDIS_PASS: 
-      MAX_REQUESTS: 10
-      MINUTES_RESEND_REQUEST: 5
-      PORT:
-     
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://jaeger:4318
     depends_on:
-      - "redis"
-  
-  redis:
-    image: redis:alpine
-    container_name: weather-playlists-redis
-    networks: 
-      - challenge
+      - redis
 
-networks:
-  challenge:
-    driver: bridge
+  redis:
+    image: redis:7-alpine
+    container_name: weather-playlists-redis
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.62.0
+    container_name: weather-playlists-jaeger
+    ports:
+      - "16686:16686"

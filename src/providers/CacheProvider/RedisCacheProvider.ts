@@ -1,10 +1,10 @@
-import Redis, { Redis as RedisClient } from 'ioredis';
+import Redis from 'ioredis';
 
 import cacheConfig from '@config/cache';
 import ICacheProvider from '@interfaces/ICacheProvider';
 
 export default class RedisCacheProvider implements ICacheProvider {
-  private client: RedisClient;
+  private client: Redis;
 
   constructor() {
     this.client = new Redis(cacheConfig.config.redis);
@@ -21,5 +21,9 @@ export default class RedisCacheProvider implements ICacheProvider {
       return null;
     }
     return JSON.parse(data) as T;
+  }
+
+  public async disconnect(): Promise<void> {
+    await this.client.quit();
   }
 }

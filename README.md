@@ -1,208 +1,104 @@
-# Weather-Playlists
+# Weather Playlists
 
-## Detalhes do Projeto
+[![CI](https://github.com/uricbonatti/weather-playlists/actions/workflows/ci.yml/badge.svg)](https://github.com/uricbonatti/weather-playlists/actions/workflows/ci.yml)
+![Node](https://img.shields.io/badge/node-22%20%7C%2024-339933?logo=node.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![Coverage](https://img.shields.io/badge/coverage-100%25%20statements-brightgreen)
 
-Projeto desenvolvido para solucionar o desafio proposto pela Squadra.
+Microsserviço REST que sugere uma **playlist do Spotify de acordo com a temperatura atual** de uma cidade ou coordenada. Foi feito como solução de um [desafio técnico](docs/DESAFIO.md).
 
-O desafio esta descrito abaixo:
-[Desafio.pdf](docs/Desafio.pdf)
+| Temperatura | Gênero |
+|---|---|
+| > 30 °C | festa |
+| 15–30 °C | pop |
+| 10–14 °C | rock |
+| < 10 °C | clássica |
 
-### **Testes**
+## Destaques técnicos
 
-Os testes do projeto utilizam das seguintes libs:
-- **Nock**: Interceptador HTTP
-- **Supertest**: Testes de Rotas e Requisições HTTP
-- **Jest**: Motor de teste
+- **Arquitetura em camadas** (controller → service → providers) com injeção de dependência (`tsyringe`)
+- **Cache no Redis** para o token e as buscas do Spotify (TTL de 1 h)
+- **Rate limit por IP** e **validação de entrada** com Joi (`celebrate`)
+- **Observabilidade:** traces com OpenTelemetry (OTLP → Jaeger), métricas Prometheus em `/metrics` e logs com `traceId`/`spanId`
+- **Testes:** 40 unitários (100% de statements) e **e2e com Testcontainers**, que sobem um Redis real; só as APIs externas são simuladas com nock
 
-Os testes apresentaram uma excelente cobertura de testes unitatios.
-Para se replicar os testes localmente é preciso ter o ```NodeJS 14.17.4```.
-Instalar a dependencias:
-```shell
-npm install
-```
-E executar os testes unitatios:
-```shell
-npm test:unit
-```
-Para se obter o arquivo de cobertura após o teste abra no navegador o arquivo ```coverage/lcov-report/index.html``` partindo da raiz do projeto.
-
-
-### **Executando Localmente**
-É preciso ter o ```NodeJS 14.17.4``` ou superior e ter o ```Redis``` na maquina.
-O ideal é  o uso do Redis através do docker, sendo o comando para criar o container o seguinte:
-```shell
-docker run --name redisWeatherSoundtrack -p 6379:6379 -d redis:alpine
-```
-Para executar o projeto precisa-se criar um arquivo ```.env``` na raiz do projeto contendo as seguintes variaveis:
-
-```env
-PORT=3333
-NODE_ENV=development
-
-#REDIS CONFIG
-REDIS_HOST = 'localhost'
-REDIS_PORT = 6379
-REDIS_PASS = 
-
-# OPEN WEATHER API CONFIGS
-OPEN_WEATHER_API_KEY=
-
-#SPOTIFY CONFIGS
-SPOTIFY_CLIENT_ID=
-SPOTIFY_SECRET=
-
-#REQUEST LIMITER
-MAX_REQUESTS=60
-MINUTES_RESEND_REQUEST=5
-
-#TELEMETRY CONFIGS
-ENABLE_METRICS= 
-ENABLE_TELEMETRY=
-JAEGER_COLLECTOR_URL=
+```mermaid
+flowchart LR
+  C[Cliente] -->|GET /tracks| API[Express]
+  API --> S[WeatherSoundtrackService]
+  S --> W[OpenWeatherMap]
+  S --> SP[Spotify]
+  SP <-->|token + buscas| R[(Redis)]
+  API -.->|traces OTLP| J[Jaeger]
+  API -.->|/metrics| P[Prometheus]
 ```
 
-Com as variaveis de ambiente configuradas, instale as dependencias do projeto atraves do:
-```shell
-npm install
+## Requisitos
+
+- Node.js **22** ou **24**
+- Docker (para o Redis local e para os testes e2e)
+- Chaves próprias da [OpenWeatherMap](https://openweathermap.org/api) e do [Spotify](https://developer.spotify.com/dashboard)
+
+## Executando
+
+```bash
+cp .env.example .env   # preencha as chaves das APIs
+npm ci
+docker run -d --name weather-redis -p 6379:6379 redis:7-alpine
+npm run start:dev
 ```
-E após a instalação o projeto esta pronto para ser executado em modo de desenvolvimento através do comando:
-```shell
-npm start:dev
+
+```bash
+curl "http://localhost:3333/tracks?city=Campinas"
+curl "http://localhost:3333/tracks?lat=-23.55&lon=-46.63"
 ```
 
-### **Executando através do Docker**
-Utilize do **docker-compose** para executar o projeto através do seguinte comando:
-```shell
-docker-compose up
+### Com Docker Compose (API + Redis + Jaeger)
+
+```bash
+cp .env.example .env   # preencha as chaves
+docker compose up --build
 ```
-A API estará disponivel na porta default 3333, podendo ser alterada dentro do arquivo ```docker-compose.yaml```
 
+A API sobe em `http://localhost:3333`. Com `ENABLE_TELEMETRY=true` no `.env`, os traces aparecem no Jaeger em `http://localhost:16686`.
 
-### **Documentação da API**
+## Testes
 
-O projeto utiliza do padrão REST e a documentação elaborada em formato OpenAPI.
-
-- Código para abrir a documentação no [Swagger](http://editor.swagger.io )
-```yaml
-openapi: 3.0.1
-info:
-  title: Weather Soundtrack API
-  description: API para obtenção de uma playlist de acordo com a temperatuda de um
-    local/cidade
-  contact:
-    email: uricbonatti.eng@gmail.com
-  version: 1.0.0
-servers:
-- url: https://localhost:3333/
-- url: http://localhost:3333/
-paths:
-  /tracks:
-    get:
-      tags:
-      - Weather Soundtrack
-      summary: Retorna uma playlist de acordo com a temperatura
-      description: Realiza a busca por cidade ou coordenada e retorna uma playlist
-        do spotify adequada para a temperatura do local
-      operationId: tracks
-      parameters:
-      - name: city
-        in: query
-        description: Nome da cidade que se quer obter a playlist
-        schema:
-          $ref: '#/components/schemas/City'
-      - name: lat
-        in: query
-        description: Latitude do local
-        schema:
-          $ref: '#/components/schemas/Latitude'
-      - name: lon
-        in: query
-        description: Longitude do local
-        schema:
-          $ref: '#/components/schemas/Longitude'
-      responses:
-        200:
-          description: Playlist obtida
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Soundtrack'
-        400:
-          description: Entrada Invalida
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationError'
-        429:
-          description: Erro de excesso de requisições por IP
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LimitAccessError'
-        500:
-          description: Erro interno do Servidor
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalError'
-components:
-  schemas:
-    City:
-      type: string
-      example: São Paulo
-    Latitude:
-      type: number
-      example: -23.5
-    Longitude:
-      type: number
-      example: -46.5
-    InternalError:
-      type: object
-      properties:
-        status:
-          type: string
-          example: error
-        message:
-          type: string
-          example: Internal Server Error
-    ValidationError:
-      type: object
-      properties:
-        status:
-          type: string
-          example: error
-        message:
-          type: string
-          example: city or valid coordinates(lon,lon) must be informed.
-        route:
-          type: string
-          example: /tracks
-        examples:
-          type: string
-          example: /tracks?city=São Paulo /tracks?lat=-23.5&lon=-46.6
-    LimitAccessError:
-      type: object
-      properties:
-        status:
-          type: string
-          example: error
-        message:
-          type: string
-          example: Too many requests from this IP, please try again after 5 minutes
-    Soundtrack:
-      type: array
-      minItems: 0
-      items:
-        type: object
-        properties:
-          name:
-            type: string
-            example: Wenn Es Nachts Ist
-          uri:
-            type: string
-            example: spotify:track:5r0iMfLookwrfLiYNXEgF1
-          spotify_link:
-            type: string
-            example: https://open.spotify.com/track/675SuKGFjigRRcGg8Ju6gT
-
+```bash
+npm test               # unitários (com --coverage gera o relatório em coverage/)
+npm run test:e2e       # e2e: sobe um Redis real com Testcontainers (requer Docker)
+npm run lint
+npm run typecheck
 ```
+
+Os testes e2e não precisam de nenhuma infraestrutura local além do Docker: cada execução cria e descarta os próprios containers.
+
+## API
+
+Documentação OpenAPI em [`docs/openapi.yaml`](docs/openapi.yaml). Abra no [Swagger Editor](https://editor.swagger.io).
+
+| Status | Quando |
+|---|---|
+| 200 | Playlist encontrada |
+| 400 | Sem cidade e sem coordenadas válidas |
+| 404 | Cidade não encontrada |
+| 429 | Limite de requisições por IP excedido |
+| 500 | Erro inesperado |
+
+## Variáveis de ambiente
+
+Veja [`.env.example`](.env.example). As principais:
+
+| Variável | Padrão | Uso |
+|---|---|---|
+| `OPEN_WEATHER_API_KEY` | — | Chave da OpenWeatherMap |
+| `SPOTIFY_CLIENT_ID` / `SPOTIFY_SECRET` | — | Credenciais do Spotify |
+| `REDIS_HOST` / `REDIS_PORT` | `localhost` / `6379` | Redis |
+| `MAX_REQUESTS` / `MINUTES_RESEND_REQUEST` | `60` / `5` | Rate limit por IP |
+| `ENABLE_METRICS` | `false` | Expõe `/metrics` |
+| `ENABLE_TELEMETRY` | `false` | Envia traces via OTLP |
+| `OTEL_EXPORTER_OTLP_ENDPOINT` | `http://localhost:4318` | Coletor OTLP (ex.: Jaeger) |
+
+## Licença
+
+MIT
